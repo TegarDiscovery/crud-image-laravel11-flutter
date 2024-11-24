@@ -39,14 +39,14 @@
                                     <td>{{ "Rp " . number_format($product->price,2,',','.') }}</td>
                                     <td>{{ $product->stock }}</td>
                                     <td class="text-center">
-                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#" method="POST" class="d-flex justify-content-center">
+                                        <form id="deleteForm{{ $product->id }}" action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-flex justify-content-center">
                                             <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-dark mr-2"><i class="fas fa-eye"></i></a>
                                             <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-primary mr-2"><i class="fas fa-edit"></i></a>
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                            <button type="button" class="btn btn-sm btn-danger" onclick="deleteProduct({{ $product->id }})"><i class="fas fa-trash"></i></button>
                                         </form>
-                                    </td>                                  
+                                    </td>                                 
                                 </tr>
                             @empty
                                 <div class="alert alert-danger">
@@ -90,5 +90,23 @@
             timer: 2000
         });
     @endif
+
+    // Fungsi untuk menampilkan konfirmasi SweetAlert sebelum submit form
+    function deleteProduct(productId) {
+        Swal.fire({
+            title: 'Apakah Anda Yakin?',
+            text: 'Data ini akan dihapus secara permanen!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Jika pengguna memilih untuk menghapus, submit form
+                document.getElementById('deleteForm' + productId).submit();
+            }
+        });
+    }
 </script>
 @endpush
