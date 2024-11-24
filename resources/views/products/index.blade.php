@@ -41,7 +41,7 @@
                                     <td class="text-center">
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#" method="POST" class="d-flex justify-content-center">
                                             <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-dark mr-2"><i class="fas fa-eye"></i></a>
-                                            <a href="#" class="btn btn-sm btn-primary mr-2"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-primary mr-2"><i class="fas fa-edit"></i></a>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
