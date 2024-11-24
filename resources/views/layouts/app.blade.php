@@ -8,6 +8,7 @@
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    @stack('css')
 </head>
 
 <body id="page-top">

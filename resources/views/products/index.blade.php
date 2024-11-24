@@ -2,6 +2,16 @@
 
 @section('title', 'Products')
 
+@push('css')
+<style>
+    .page-item.active .page-link {
+        background-color: #1CC88A;
+        border-color: #1CC88A;
+        color: white;
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="container-fluid mt-5">
     <div class="row">
@@ -36,7 +46,7 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                         </form>
-                                    </td>                                    
+                                    </td>                                  
                                 </tr>
                             @empty
                                 <div class="alert alert-danger">
@@ -45,7 +55,11 @@
                             @endforelse
                         </tbody>
                     </table>
-                    {{ $products->links() }}
+
+                    <!-- Pagination -->
+                    <div class="d-flex justify-content-center">
+                        {{ $products->links() }} <!-- Menampilkan pagination -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,27 +69,26 @@
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
-        //message with sweetalert
-        @if(session('success'))
-            Swal.fire({
-                icon: "success",
-                title: "BERHASIL",
-                text: "{{ session('success') }}",
-                showConfirmButton: false,
-                timer: 2000
-            });
-        @elseif(session('error'))
-            Swal.fire({
-                icon: "error",
-                title: "GAGAL!",
-                text: "{{ session('error') }}",
-                showConfirmButton: false,
-                timer: 2000
-            });
-        @endif
-
-    </script>
+<script>
+    // Sweetalert untuk pesan success dan error
+    @if(session('success'))
+        Swal.fire({
+            icon: "success",
+            title: "BERHASIL",
+            text: "{{ session('success') }}",
+            showConfirmButton: false,
+            timer: 2000
+        });
+    @elseif(session('error'))
+        Swal.fire({
+            icon: "error",
+            title: "GAGAL!",
+            text: "{{ session('error') }}",
+            showConfirmButton: false,
+            timer: 2000
+        });
+    @endif
+</script>
 @endpush
